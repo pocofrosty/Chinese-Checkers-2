@@ -3,8 +3,6 @@ import {
   Routes, Route, Outlet,
 } from 'react-router-dom'
 
-require('dotenv').config()
-
 // eslint-disable-next-line no-undef
 export default App = () => (
   <div>

@@ -3,6 +3,17 @@ const mongoose = require('mongoose')
 const path = require('path')
 const cors = require('cors')
 
+require('dotenv').config()
+
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGO_DATABASE
+
+console.log(process.env.MONGO_DATABASE)
+
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+
 const app = express()
 
 app.use(express.json())
