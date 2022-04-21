@@ -1,0 +1,51 @@
+{
+  "name": "chinese-checkers-2",
+  "version": "1.0.0",
+  "description": "part 2 eletric boogaloo",
+  "scripts": {
+    "frontend:dev": "parcel watch ./frontend/src/index.html",
+    "frontend:build": "parcel build ./frontend/src/index.html",
+    "backend:dev": "nodemon backend/server.js",
+    "dev": "concurrently --kill-others \"npm run frontend:dev\" \"npm run backend:dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.4",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "events": "^3.3.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "postcss": "^8.4.12",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.0.23",
+    "util": "^0.12.4"
+  },
+  "dependencies": {
+    "@parcel/transformer-react-refresh-wrap": "^2.4.1",
+    "axios": "^0.26.1",
+    "concurrently": "^7.1.0",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.2.10",
+    "nodemon": "^2.0.15",
+    "parcel": "^2.4.1",
+    "passport": "^0.5.2",
+    "passport-google-oauth20": "^2.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1"
+  }
+}
