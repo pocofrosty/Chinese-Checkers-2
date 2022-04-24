@@ -21,11 +21,15 @@ class HexUtil {
     return new Hex(a.q + b.q, a.r + b.r, a.s + b.s)
   }
 
+  static substract(a, b) {
+    return new Hex(a.q - b.q, a.r - b.r, a.s - b.s)
+  }
+
   static equals(a, b) {
     return a.q == b.q && a.r == b.r && a.s == b.s
   }
 
-  static adjacentHexes(tuple) {
+  static getAdjacentHexes(tuple) {
     const { q, r, s } = this.convertTupleToHex(tuple)
     const center = new Hex(q, r, s)
     const adjacentHexes = []
@@ -36,7 +40,7 @@ class HexUtil {
     return adjacentHexes
   }
 
-  // tuple inputs
+  // note tuple inputs
   static isAdjacentHex(a, b) {
     const adjacentHexes = this.adjacentHexes(a)
     const hexB = this.convertTupleToHex(b)
@@ -46,6 +50,13 @@ class HexUtil {
       if (this.equals(hex, hexB)) {return true}
     }
     return false
+  }
+
+  // recursive jumping moves function
+  static getReachableByJumping( initialMoves) {
+    const moves = []
+
+    return moves
   }
 }
 

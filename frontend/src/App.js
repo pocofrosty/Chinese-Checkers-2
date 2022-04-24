@@ -8,7 +8,14 @@ import axios from 'axios'
 import {
   Pattern, HexGrid, Layout, Hexagon, Text, HexUtils, Hex,
 } from 'react-hexgrid'
-import HexUtil, { adjacentHexes } from '../../backend/util/HexUtil'
+import HexUtil, { getAdjacentHexes } from '../../backend/util/HexUtil'
+
+import redmarble from './assets/red-marble.png'
+import purplemarble from './assets/purple-marble.png'
+import greenmarble from './assets/green-marble.png'
+import yellowmarble from './assets/yellow-marble.png'
+import bluemarble from './assets/blue-marble.png'
+import orangemarble from './assets/orange-marble.png'
 
 // eslint-disable-next-line no-undef
 export default App = () => {
@@ -16,7 +23,26 @@ export default App = () => {
   const [gameList, setGameList] = useState({})
   const [currentGame, setCurrentGame] = useState({})
   const [currentlySelected, setCurrentlySelected] = useState('')
-  const possibleMoves = useMemo(() => {}, [currentlySelected])
+  const possibleMoves = useMemo(() => {
+    const moves = []
+    // intial directly adjacent squares
+    const adjacentHexes = HexUtil.getAdjacentHexes(currentlySelected)
+    try {
+      const hexCoordinates = Object.keys(currentGame.board)
+      for (const hex of adjacentHexes) {
+        const tuple = HexUtil.convertHexToTuple(hex)
+        if (hexCoordinates.includes(tuple)) {
+          moves.push(hex)
+        }
+      }
+    } catch (e) {
+      console.log(null)
+    }
+
+    // add moves from jumping
+
+    return moves
+  }, [currentlySelected])
 
   // eslint-disable-next-line no-undef
   getCurrentUser = async () => {
@@ -56,14 +82,16 @@ export default App = () => {
     })
   }, [])
 
+  // local asset imports
   const initializePatterns = () => (
     <>
-      <Pattern id="red" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/red-marble.PNG?raw=true" />
-      <Pattern id="blue" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/blue-marble.PNG?raw=true" />
-      <Pattern id="green" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/green-marble.PNG?raw=true" />
-      <Pattern id="orange" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/orange-marble.PNG?raw=true" />
-      <Pattern id="yellow" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/yellow-marble.PNG?raw=true" />
-      <Pattern id="purple" size={{ x: 2.7, y: 3 }} link="https://github.com/pocofrosty/CiS197-Chinese-Checkers/blob/main/frontend/assets/purple-marble.PNG?raw=true" />
+      <Pattern id="red" size={{ x: 2.7, y: 3 }} link={redmarble} />
+      <Pattern id="blue" size={{ x: 2.7, y: 3 }} link={bluemarble} />
+      <Pattern id="green" size={{ x: 2.7, y: 3 }} link={greenmarble} />
+      <Pattern id="orange" size={{ x: 2.7, y: 3 }} link={orangemarble} />
+      <Pattern id="yellow" size={{ x: 2.7, y: 3 }} link={yellowmarble} />
+      <Pattern id="purple" size={{ x: 2.7, y: 3 }} link={purplemarble} />
+      {/* <Pattern id="circled" /> */}
     </>
   )
 
@@ -140,7 +168,13 @@ const HexGridPage = ({
             onClick={() => {
               setCurrentlySelected(tuple)
             }}
-          />
+          >
+            <Text>
+              {' '}
+              {HexUtils.getID(hex)}
+              {' '}
+            </Text>
+          </Hexagon>
         )
       })
         : null}
