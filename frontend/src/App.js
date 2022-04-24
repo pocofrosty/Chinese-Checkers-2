@@ -2,10 +2,20 @@ import React from 'react'
 import {
   Routes, Route, Outlet,
 } from 'react-router-dom'
+import axios from 'axios'
 
-// eslint-disable-next-line no-undef
+// eslint-disable-nWext-line no-undef
 export default App = () => (
   <div>
+    <button onClick={() => {
+      axios.get('/account/')
+    }}
+    >
+      {' '}
+      Sign In with google
+      {' '}
+
+    </button>
     <Routes path="/" element={<Layout />}>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
