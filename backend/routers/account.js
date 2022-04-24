@@ -1,3 +1,4 @@
+// currently only used for database calls; future - use for local accounts
 const express = require('express')
 
 const Account = require('../models/Account')

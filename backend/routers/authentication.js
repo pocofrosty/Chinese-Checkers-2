@@ -16,5 +16,9 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
   res.redirect('http://localhost:3000/temp')
 })
 
+router.get('/session', (req, res) => {
+  res.json(req.session)
+})
+
 // export
 module.exports = router

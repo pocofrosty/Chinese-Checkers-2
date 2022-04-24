@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Routes, Route, Outlet,
 } from 'react-router-dom'
@@ -6,7 +6,19 @@ import axios from 'axios'
 
 // eslint-disable-next-line no-undef
 export default App = () => {
-  const text = 'test'
+  const [text, setText] = useState('')
+
+  // eslint-disable-next-line no-undef
+  getCurrentUser = async () => {
+    const res = await axios.get('/auth/session')
+    setText(res)
+    return res
+  }
+
+  useEffect(() => {
+    getCurrentUser().then(res => {setText(res.data.passport.user)})
+  }, [])
+
   return (
     <div>
       <button onClick={() => {
@@ -14,6 +26,12 @@ export default App = () => {
       }}
       >
         Sign In with google
+      </button>
+      <button onClick={async () => {
+        console.log(await axios.get('/auth/session'))
+      }}
+      >
+        Current User
       </button>
       <Routes path="/" element={<Layout />}>
         <Route path="temp" element={<ValidPage text={text} />} />

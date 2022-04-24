@@ -18,7 +18,7 @@ passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
 }, async (accessToken, refreshToken, profile, done) => {
-  const a = await Account.findOrCreate(
+  await Account.findOrCreate(
     { googleID: profile.id },
     { username: profile.displayName },
   )
