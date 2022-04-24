@@ -8,9 +8,5 @@ const router = express.Router()
 
 // routes
 
-router.get('/', passport.authenticate('google', { scope: ['profile'] }), (req, res) => {
-  res.send('Success')
-})
-
 // export
 module.exports = router

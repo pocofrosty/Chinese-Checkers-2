@@ -5,10 +5,10 @@ const path = require('path')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const cookieSession = require('cookie-session')
-
+const passport = require('passport')
 // import routers
 
-const AccountRouter = require('./routers/account')
+const AuthenticationRouter = require('./routers/authentication')
 
 // Environmental Variables Set-up
 dotenv.config({ path: `${__dirname}/.env` })
@@ -38,8 +38,12 @@ app.use(cookieSession({
   maxAge: 60 * 60 * 1000, // 1 Hour
 }))
 
+// passport uses cookie-session
+app.use(passport.initialize())
+app.use(passport.session())
+
 // routers
-app.use('/account', AccountRouter)
+app.use('/auth', AuthenticationRouter)
 
 // default error handling
 app.use((err, req, res, next) => {
