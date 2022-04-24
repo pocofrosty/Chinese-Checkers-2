@@ -22,27 +22,8 @@ import circled from './assets/circled.png'
 export default App = () => {
   const [currentUser, setCurrentUser] = useState('')
   const [gameList, setGameList] = useState({})
-  const [currentGame, setCurrentGame] = useState({ })
+  const [currentGame, setCurrentGame] = useState({ name: 'test2' })
   const [currentlySelected, setCurrentlySelected] = useState('')
-  const possibleMoves = useMemo(() => {
-    const moves = []
-    // intial directly adjacent squares
-    const adjacentHexes = HexUtil.getAdjacentHexes(currentlySelected)
-    try {
-      const hexCoordinates = Object.keys(currentGame.board)
-      for (const hex of adjacentHexes) {
-        const tuple = HexUtil.convertHexToTuple(hex)
-        if (hexCoordinates.includes(tuple) && currentGame.board[tuple].color === null) {
-          moves.push(hex)
-        }
-      }
-    } catch (e) {
-      console.log(null)
-    }
-
-    console.log(moves)
-    return moves
-  }, [currentlySelected])
 
   // eslint-disable-next-line no-undef
   getCurrentUser = async () => {
@@ -60,7 +41,7 @@ export default App = () => {
     return res.data
   }
 
-  loadGameByID = async name => {
+  loadGameByName = async name => {
     for (const key in gameList) {
       if (gameList[key].name === name) {
         return gameList[key]
@@ -69,17 +50,49 @@ export default App = () => {
     return {}
   }
 
+  // request info at start
   useEffect(() => {
     getCurrentUser().then(res => {
       setCurrentUser(res)
     })
     getGames().then(res => {
       setGameList(res)
-      loadGameByID('test5').then(game => {
+      loadGameByName(currentGame.name).then(game => {
         setCurrentGame(game)
       })
     })
   }, [])
+
+  // local changes of circles
+  const updateCircled = moves => {
+    let copy = {}
+    copy = getGames().then(res => {
+      loadGameByName(currentGame.name).then(() => {
+        console.log(copy)
+      })
+    })
+  }
+
+  const possibleMoves = useMemo(() => {
+    const moves = []
+    // intial directly adjacent squares
+    const adjacentHexes = HexUtil.getAdjacentHexes(currentlySelected)
+    try {
+      const hexCoordinates = Object.keys(currentGame.board)
+      for (const hex of adjacentHexes) {
+        const tuple = HexUtil.convertHexToTuple(hex)
+        if (hexCoordinates.includes(tuple) && currentGame.board[tuple].color === null) {
+          moves.push(hex)
+        }
+      }
+    } catch (e) {
+      console.log(null)
+    }
+
+    updateCircled(moves)
+
+    return moves
+  }, [currentlySelected])
 
   // local asset imports
   const initializePatterns = () => (

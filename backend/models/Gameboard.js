@@ -5,7 +5,12 @@ const { Schema, model } = mongoose
 
 const gameboardSchema = new Schema({
   name: { type: String, unique: true },
-  board: { type: Object },
+  board: {
+    type: [{
+      tuple: { type: String },
+      color: { type: String },
+    }],
+  },
   turn: { type: Number },
 })
 

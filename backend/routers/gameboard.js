@@ -2,7 +2,6 @@
 /* eslint-disable no-restricted-syntax */
 // importing packages
 const express = require('express')
-const passport = require('passport')
 const HexUtil = require('../util/HexUtil')
 
 const Gameboard = require('../models/Gameboard')
@@ -55,7 +54,13 @@ router.post('/newgame', (req, res) => {
     }
   }
 
-  Gameboard.create({ name, board: hexagonData, turn: 0 })
+  // Convert to Array
+  const hexagonArray = []
+  for (const key of Object.keys(hexagonData)) {
+    hexagonArray.push({ tuple: key, color: hexagonData[key].color })
+  }
+
+  Gameboard.create({ name, board: hexagonArray, turn: 0 })
   res.send('success')
 })
 
@@ -64,8 +69,28 @@ router.get('/games', async (req, res) => {
   res.json(games)
 })
 
-router.post('/validate', (req, res) => {
-  const { body: { start, end } } = req
+router.post('/findgame', async (req, res) => {
+  const { body: { name } } = req
+  const game = await Gameboard.findOne({ name })
+  res.json(game)
+})
+
+// add validation
+router.post('/validate', async (req, res) => {
+  const {
+    body: {
+      start, end, color, name,
+    },
+  } = req
+  const temp = await Gameboard.findOne({ name })
+  for (const idx in temp.board) {
+    if (temp.board[idx].tuple === start) {
+      temp.board[idx].color = null
+    } else if (temp.board[idx].tuple === end) {
+      temp.board[idx].color = color
+    }
+  }
+  await Gameboard.replaceOne({ name }, temp)
   res.send('success')
 })
 
