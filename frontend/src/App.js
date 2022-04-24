@@ -32,7 +32,7 @@ export default App = () => {
       const hexCoordinates = Object.keys(currentGame.board)
       for (const hex of adjacentHexes) {
         const tuple = HexUtil.convertHexToTuple(hex)
-        if (hexCoordinates.includes(tuple)) {
+        if (hexCoordinates.includes(tuple) && currentGame.board[tuple].color === null) {
           moves.push(hex)
         }
       }
@@ -40,9 +40,7 @@ export default App = () => {
       console.log(null)
     }
 
-    // add moves from jumping
-    HexUtil.getReachableByJumping(currentlySelected, currentGame.board)
-
+    console.log(moves)
     return moves
   }, [currentlySelected])
 
@@ -71,14 +69,13 @@ export default App = () => {
     return {}
   }
 
-  // why is this running twice
   useEffect(() => {
     getCurrentUser().then(res => {
       setCurrentUser(res)
     })
     getGames().then(res => {
       setGameList(res)
-      loadGameByID('test3').then(game => {
+      loadGameByID('test5').then(game => {
         setCurrentGame(game)
       })
     })
