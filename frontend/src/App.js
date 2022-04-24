@@ -16,12 +16,13 @@ import greenmarble from './assets/green-marble.png'
 import yellowmarble from './assets/yellow-marble.png'
 import bluemarble from './assets/blue-marble.png'
 import orangemarble from './assets/orange-marble.png'
+import circled from './assets/circled.png'
 
 // eslint-disable-next-line no-undef
 export default App = () => {
   const [currentUser, setCurrentUser] = useState('')
   const [gameList, setGameList] = useState({})
-  const [currentGame, setCurrentGame] = useState({})
+  const [currentGame, setCurrentGame] = useState({ })
   const [currentlySelected, setCurrentlySelected] = useState('')
   const possibleMoves = useMemo(() => {
     const moves = []
@@ -40,6 +41,7 @@ export default App = () => {
     }
 
     // add moves from jumping
+    HexUtil.getReachableByJumping(currentlySelected, currentGame.board)
 
     return moves
   }, [currentlySelected])
@@ -76,7 +78,7 @@ export default App = () => {
     })
     getGames().then(res => {
       setGameList(res)
-      loadGameByID('test2').then(game => {
+      loadGameByID('test3').then(game => {
         setCurrentGame(game)
       })
     })
@@ -91,7 +93,7 @@ export default App = () => {
       <Pattern id="orange" size={{ x: 2.7, y: 3 }} link={orangemarble} />
       <Pattern id="yellow" size={{ x: 2.7, y: 3 }} link={yellowmarble} />
       <Pattern id="purple" size={{ x: 2.7, y: 3 }} link={purplemarble} />
-      {/* <Pattern id="circled" /> */}
+      <Pattern id="circled" size={{ x: 2.7, y: 3 }} link={circled} />
     </>
   )
 
