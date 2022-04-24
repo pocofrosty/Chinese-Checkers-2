@@ -9,6 +9,7 @@ const cookieSession = require('cookie-session')
 // import routers
 
 const AuthenticationRouter = require('./routers/authentication')
+const AccountRouter = require('./routers/account')
 
 // Environmental Variables Set-up
 dotenv.config({ path: `${__dirname}/.env` })
@@ -40,6 +41,7 @@ app.use(cookieSession({
 
 // routers
 app.use('/auth', AuthenticationRouter)
+app.use('/account', AccountRouter)
 
 // default error handling
 app.use((err, req, res, next) => {

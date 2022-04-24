@@ -17,7 +17,11 @@ passport.use(new GoogleStrategy({
   callbackURL: 'http://localhost:3000/auth/google/redirect',
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-}, (accessToken, refreshToken, profile, done) => {
-  console.log(profile)
+}, async (accessToken, refreshToken, profile, done) => {
+  const a = await Account.findOrCreate(
+    { googleID: profile.id },
+    { username: profile.displayName },
+  )
+    .then(doc => doc)
   done(null, profile)
 }))

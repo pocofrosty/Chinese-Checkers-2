@@ -6,7 +6,7 @@ import axios from 'axios'
 
 // eslint-disable-next-line no-undef
 export default App = () => {
-  const text = "test"
+  const text = 'test'
   return (
     <div>
       <button onClick={() => {
@@ -16,7 +16,7 @@ export default App = () => {
         Sign In with google
       </button>
       <Routes path="/" element={<Layout />}>
-        <Route path="temp" element={<ValidPage text={text}/>} />
+        <Route path="temp" element={<ValidPage text={text} />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
@@ -35,8 +35,12 @@ const ErrorPage = () => (
   </div>
 )
 
-const ValidPage = ({text}) => (
+const ValidPage = ({ text }) => (
   <div>
-    <h1> {`Username: ${text}`} </h1>
+    <h1>
+      {' '}
+      {`Username: ${text}`}
+      {' '}
+    </h1>
   </div>
 )
