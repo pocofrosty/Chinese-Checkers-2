@@ -9,7 +9,6 @@ const cookieSession = require('cookie-session')
 // import routers
 
 const AuthenticationRouter = require('./routers/authentication')
-const AccountRouter = require('./routers/account')
 const GameboardRouter = require('./routers/gameboard')
 
 // Environmental Variables Set-up
@@ -42,7 +41,6 @@ app.use(cookieSession({
 
 // routers
 app.use('/auth', AuthenticationRouter)
-app.use('/account', AccountRouter)
 app.use('/gameboard', GameboardRouter)
 
 // default error handling

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Title from './subcomponents/Title'
 import logo from '../assets/logo.png'
 
-const GameList = () => (
+const HomePage = () => (
   <div className="grid grid-cols-1 py-2 px-3 px-16">
     <img src={logo} alt="" />
     <Title text="Home Page of Chinese Checkers" />
@@ -15,4 +15,4 @@ const GameList = () => (
   </div>
 )
 
-export default GameList
+export default HomePage
