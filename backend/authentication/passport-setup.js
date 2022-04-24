@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   Account.findById(id).then(user => {
-    done(null, user.id)
+    done(null, user)
   })
 })
 
@@ -18,14 +18,6 @@ passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
 }, (accessToken, refreshToken, profile, done) => {
-  console.log(1)
-  //   console.log(Account.findOne({ googleID: '100025941064471211927' }))
-  //   Account.findOrCreate({ googleID: profile.id }, (err, account) => {
-  //     new Account({
-  //       username: profile.displayName,
-  //       googleID: profile.id,
-  //     }).save().then(console.log(1))
-  //   })
-
+  console.log(profile)
   done(null, profile)
 }))

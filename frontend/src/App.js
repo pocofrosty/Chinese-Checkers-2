@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  Routes, Route, Outlet, 
+  Routes, Route, Outlet,
 } from 'react-router-dom'
 import axios from 'axios'
 

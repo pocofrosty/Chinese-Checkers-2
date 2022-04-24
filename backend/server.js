@@ -5,7 +5,7 @@ const path = require('path')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const cookieSession = require('cookie-session')
-const passport = require('passport')
+
 // import routers
 
 const AuthenticationRouter = require('./routers/authentication')
@@ -37,10 +37,6 @@ app.use(cookieSession({
   keys: [process.env.COOKIE_KEY],
   maxAge: 60 * 60 * 1000, // 1 Hour
 }))
-
-// passport uses cookie-session
-app.use(passport.initialize())
-app.use(passport.session())
 
 // routers
 app.use('/auth', AuthenticationRouter)
