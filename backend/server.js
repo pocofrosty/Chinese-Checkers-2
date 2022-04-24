@@ -2,12 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
 const cors = require('cors')
+const dotenv = require('dotenv')
 
-require('dotenv').config()
+dotenv.config({ path: `${__dirname}/.env` })
 
-const MONGO_URI = process.env.MONGO_URI || process.env.MONGO_DATABASE
-
-console.log(process.env.MONGO_DATABASE)
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGO_DATABASE_URI
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
