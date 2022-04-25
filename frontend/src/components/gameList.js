@@ -1,17 +1,28 @@
 import React from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import Title from './subcomponents/Title'
-import logo from '../assets/logo.png'
+import { useNavigate } from 'react-router-dom'
 
-const GameList = () => (
+import Title from './subcomponents/Title'
+import GameButton from './subcomponents/GameButton'
+import RefreshButton from './subcomponents/RefreshButton'
+
+const GameList = ({
+  currentUsername, gameList, setGameList, setCurrentGame,
+}) => (
   <div className="grid grid-cols-1 py-2 px-3 px-16">
-    <img src={logo} alt="" />
-    <Title text="Home Page of Chinese Checkers" />
+    <Title className="font-bold text-3xl" text="List of Games" />
+    <label>
+      {' '}
+      {`Current Username: ${currentUsername}`}
+      {' '}
+    </label>
+    <RefreshButton setGameList={setGameList} />
     <br />
-    <Link className="text-blue-400" to="/signup"> Signup </Link>
-    <br />
-    <Link className="text-blue-400" to="/login"> Login </Link>
+    { gameList.map(game => (
+      <>
+        <GameButton key={game._id} gameName={game.name} setCurrentGame={setCurrentGame} />
+        <br />
+      </>
+    ))}
   </div>
 )
 

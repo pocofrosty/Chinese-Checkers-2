@@ -41,22 +41,22 @@ class HexUtil {
   }
 
   // note tuple inputs
-  static isAdjacentHex(a, b) {
-    const adjacentHexes = this.adjacentHexes(a)
-    const hexB = this.convertTupleToHex(b)
-    for (const hex of adjacentHexes)
-    {
-      console.log(hex)
-      if (this.equals(hex, hexB)) {return true}
-    }
-    return false
-  }
+  // static isAdjacentHex(a, b) {
+  //   const adjacentHexes = this.adjacentHexes(a)
+  //   const hexB = this.convertTupleToHex(b)
+  //   for (const hex of adjacentHexes)
+  //   {
+  //     console.log(hex)
+  //     if (this.equals(hex, hexB)) {return true}
+  //   }
+  //   return false
+  // }
 
-  static isInGameboard(hex, gameboard) {
-    const tuple = this.convertHexToTuple(hex)
-    const hexCoordinates = Object.keys(gameboard)
-    return (hexCoordinates.includes(tuple))
-  }
+  // static isInGameboard(hex, gameboard) {
+  //   const tuple = this.convertHexToTuple(hex)
+  //   const hexCoordinates = Object.keys(gameboard)
+  //   return (hexCoordinates.includes(tuple))
+  // }
 
   // // recursive jumping moves function
   // static getReachableByJumping( centerTuple, gameboard, moves) {

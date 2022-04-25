@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import TextBox from './subcomponents/TextBox'
 import Title from './subcomponents/Title'
 import GoogleLoginButton from './subcomponents/GoogleLoginButton'
+import LoginButton from './subcomponents/LoginButton'
 
 const LoginPage = ({ setCurrentUsername }) => {
   const [username, setUsername] = useState('')
@@ -22,6 +23,8 @@ const LoginPage = ({ setCurrentUsername }) => {
       <label> Password: </label>
       <br />
       <TextBox backgroundName="Password" setText={setPassword} />
+      <br />
+      <LoginButton username={username} password={password} setCurrentUsername={setCurrentUsername} switchScreens={navigate} />
       <br />
       <GoogleLoginButton setCurrentUsername={setCurrentUsername} />
       <label> Don&apos;t have an account? </label>

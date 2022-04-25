@@ -5,11 +5,15 @@ const path = require('path')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const cookieSession = require('cookie-session')
+const http = require('http') // require the vanilla http server
+const { Server } = require('socket.io') // require socket.io
 
 // import routers
 
 const AuthenticationRouter = require('./routers/authentication')
 const GameboardRouter = require('./routers/gameboard')
+const ProfileRouter = require('./routers/profile')
+const UserRouter = require('./routers/user')
 
 // Environmental Variables Set-up
 dotenv.config({ path: `${__dirname}/.env` })
@@ -25,8 +29,18 @@ mongoose.connect(MONGO_URI, {
 
 const PassportSetup = require('./authentication/passport-setup')
 
-// server
+// app
 const app = express()
+const server = http.createServer(app) // create our server
+const io = new Server(server) // create our IO sockets
+
+// socket io connection
+io.on('connection', socket => {
+  console.log('a user is connected')
+  socket.on('message', data => {
+    io.emit('message', data)
+  })
+})
 
 // Some middleware for parsing
 app.use(express.json())
@@ -41,7 +55,9 @@ app.use(cookieSession({
 
 // routers
 app.use('/auth', AuthenticationRouter)
+app.use('/profile', ProfileRouter)
 app.use('/gameboard', GameboardRouter)
+app.use('/user', UserRouter)
 
 // default error handling
 app.use((err, req, res, next) => {
@@ -55,6 +71,6 @@ app.get('*', (req, res) => {
 })
 
 // run the backend server at PORT 3000
-app.listen(3000, () => {
+server.listen(3000, () => {
   console.log('Server is running on port 3000')
 })

@@ -12,7 +12,9 @@ import bluemarble from '../assets/blue-marble.png'
 import orangemarble from '../assets/orange-marble.png'
 import circled from '../assets/circled.png'
 
-const Gameview = () => {
+const Gameview = ({ currentGame }) => {
+  const [currentlySelected, setCurrentlySelected] = useState('')
+
   const initializePatterns = () => (
     <>
       <Pattern id="red" size={{ x: 2.7, y: 3 }} link={redmarble} />
@@ -26,7 +28,11 @@ const Gameview = () => {
   )
 
   return (
-    <label> test </label>
+    <label>
+      {' '}
+      test
+      {' '}
+    </label>
   // <HexGrid width={1000} height={1000}>
   //   <Layout size={{ x: 3, y: 3 }} flat={false} spacing={1.02} origin={{ x: 0, y: 0 }}>
   //     { (currentGame.board) ? Object.keys(currentGame.board).map(tuple => {

@@ -2,8 +2,6 @@
 const express = require('express')
 const passport = require('passport')
 
-const Account = require('../models/Account')
-
 const router = express.Router()
 
 // routes
@@ -13,11 +11,9 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }), (
 })
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.redirect('http://localhost:3000/temp')
-})
-
-router.get('/session', (req, res) => {
-  res.json(req.session)
+  // eslint-disable-next-line prefer-destructuring
+  req.session.username = req.user.displayName
+  res.redirect('http://localhost:3000/gamelist')
 })
 
 // export
