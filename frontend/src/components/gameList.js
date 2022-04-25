@@ -1,26 +1,40 @@
+import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Title from './subcomponents/Title'
-import GameButton from './subcomponents/GameButton'
-import RefreshButton from './subcomponents/RefreshButton'
 
 const GameList = ({
   currentUsername, gameList, setGameList, setCurrentGame,
 }) => (
   <div className="grid grid-cols-1 py-2 px-3 px-16">
     <Title className="font-bold text-3xl" text="List of Games" />
-    <label>
+    <button
+      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      onClick={async () => {
+        await axios.get('/gameboard/games').then(r => setGameList(r.data))
+      }}
+    >
       {' '}
-      {`Current Username: ${currentUsername}`}
+      Refresh
       {' '}
-    </label>
-    <RefreshButton setGameList={setGameList} />
+
+    </button>
     <br />
-    { gameList.map(game => (
+    {gameList.map(game => (
       <>
-        <GameButton key={game._id} gameName={game.name} setCurrentGame={setCurrentGame} />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
+            setCurrentGame(game)
+          }}
+        >
+          {' '}
+          {`Game: ${game.name}`}
+          {' '}
+        </button>
         <br />
+
       </>
     ))}
   </div>

@@ -17,11 +17,11 @@ const socket = io('http://localhost:3000')
 
 export default App = () => {
   const [gameList, setGameList] = useState([])
-  const [currentGame, setCurrentGame] = useState('')
+  const [currentGame, setCurrentGame] = useState({})
 
   const [currentUsername, setCurrentUsername] = useState('')
 
-  // functions to retrieve info
+  // // functions to retrieve info
   getGameList = async () => {
     const res = await axios.get('/gameboard/games')
     setGameList(res.data)
@@ -55,7 +55,7 @@ export default App = () => {
         <Route path="signup" element={<SignUpPage />} />
         <Route path="login" element={<LoginPage setCurrentUsername={setCurrentUsername} />} />
         <Route path="gamelist" element={<GameList currentUsername={currentUsername} gameList={gameList} setGameList={setGameList} setCurrentGame={setCurrentGame} />} />
-        <Route path="gameview" element={<Gameview currentGame={getGameByName(currentGame)} />} />
+        <Route path="gameview" element={<Gameview currentGame={currentGame} getGameByName={getGameByName} />} />
         <Route path="" element={<HomePage />} />
         <Route path="*" element={<ErrorPage currentText={currentGame} />} />
       </Routes>

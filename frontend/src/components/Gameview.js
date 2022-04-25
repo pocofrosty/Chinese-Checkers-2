@@ -12,7 +12,9 @@ import bluemarble from '../assets/blue-marble.png'
 import orangemarble from '../assets/orange-marble.png'
 import circled from '../assets/circled.png'
 
-const Gameview = ({ currentGame }) => {
+import HexUtil from '../../../backend/util/HexUtil'
+
+const Gameview = ({ currentGame, getGameByName }) => {
   const [currentlySelected, setCurrentlySelected] = useState('')
 
   const initializePatterns = () => (
@@ -27,40 +29,42 @@ const Gameview = ({ currentGame }) => {
     </>
   )
 
+  getGameByName(currentGame).then(r => console.log(r))
   return (
-    <label>
-      {' '}
-      test
-      {' '}
-    </label>
-  // <HexGrid width={1000} height={1000}>
-  //   <Layout size={{ x: 3, y: 3 }} flat={false} spacing={1.02} origin={{ x: 0, y: 0 }}>
-  //     { (currentGame.board) ? Object.keys(currentGame.board).map(tuple => {
-  //       const hex = HexUtil.convertTupleToHex(tuple)
-  //       return (
-  //         <Hexagon
-  //           className=""
-  //           key={`${hex.q}${hex.r}${hex.s}`}
-  //           q={hex.q}
-  //           r={hex.r}
-  //           s={hex.s}
-  //           fill={currentBoard[tuple].color}
-  //           onClick={() => {
-  //             setCurrentlySelected(tuple)
-  //           }}
-  //         >
-  //           <Text>
-  //             {' '}
-  //             {HexUtils.getID(hex)}
-  //             {' '}
-  //           </Text>
-  //         </Hexagon>
-  //       )
-  //     })
-  //       : null}
-  //     {initializePatterns}
-  //   </Layout>
-  // </HexGrid>
+    <>
+      <label>
+        {`Current Game: ${currentGame}`}
+      </label>
+      {/* <HexGrid width={1000} height={1000}>
+        <Layout size={{ x: 3, y: 3 }} flat={false} spacing={1.02} origin={{ x: 0, y: 0 }}>
+          {(currentGame.board) ? Object.keys(currentGame.board).map(tuple => {
+            const hex = HexUtil.convertTupleToHex(tuple)
+            return (
+              <Hexagon
+                className=""
+                key={`${hex.q}${hex.r}${hex.s}`}
+                q={hex.q}
+                r={hex.r}
+                s={hex.s}
+                fill={currentBoard[tuple].color}
+                onClick={() => {
+                  setCurrentlySelected(tuple)
+                }}
+              >
+                <Text>
+                  {' '}
+                  {HexUtils.getID(hex)}
+                  {' '}
+                </Text>
+              </Hexagon>
+            )
+          })
+            : null}
+          {initializePatterns}
+        </Layout>
+      </HexGrid> */}
+
+    </>
   )
 }
 export default Gameview
