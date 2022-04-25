@@ -27,6 +27,8 @@ const GameList = ({
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
             setCurrentGame(game)
+            console.log(game)
+            window.location.href = 'http://localhost:3000/gameview'
           }}
         >
           {' '}

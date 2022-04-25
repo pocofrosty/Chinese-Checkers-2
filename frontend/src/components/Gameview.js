@@ -29,41 +29,18 @@ const Gameview = ({ currentGame, getGameByName }) => {
     </>
   )
 
-  getGameByName(currentGame).then(r => console.log(r))
+  const temp = getGameByName('test6').then(r => {return r})
   return (
     <>
       <label>
         {`Current Game: ${currentGame}`}
       </label>
-      {/* <HexGrid width={1000} height={1000}>
+      <HexGrid width={1000} height={1000}>
         <Layout size={{ x: 3, y: 3 }} flat={false} spacing={1.02} origin={{ x: 0, y: 0 }}>
-          {(currentGame.board) ? Object.keys(currentGame.board).map(tuple => {
-            const hex = HexUtil.convertTupleToHex(tuple)
-            return (
-              <Hexagon
-                className=""
-                key={`${hex.q}${hex.r}${hex.s}`}
-                q={hex.q}
-                r={hex.r}
-                s={hex.s}
-                fill={currentBoard[tuple].color}
-                onClick={() => {
-                  setCurrentlySelected(tuple)
-                }}
-              >
-                <Text>
-                  {' '}
-                  {HexUtils.getID(hex)}
-                  {' '}
-                </Text>
-              </Hexagon>
-            )
-          })
-            : null}
+          {}
           {initializePatterns}
         </Layout>
-      </HexGrid> */}
-
+      </HexGrid>
     </>
   )
 }
