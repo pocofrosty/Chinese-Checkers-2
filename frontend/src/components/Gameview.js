@@ -29,7 +29,8 @@ const Gameview = ({ currentGame, getGameByName }) => {
     </>
   )
 
-  const temp = getGameByName('test6').then(r => {return r})
+  const temp = async () => getGameByName(currentGame)
+
   return (
     <>
       <label>
