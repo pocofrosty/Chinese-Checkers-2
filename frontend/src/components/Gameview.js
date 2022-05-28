@@ -34,7 +34,7 @@ const Gameview = ({ currentGame, getGameByName }) => {
   return (
     <>
       <label>
-        {`Current Game: ${currentGame}`}
+        {`Current Game: ${currentGame.name}`}
       </label>
       <HexGrid width={1000} height={1000}>
         <Layout size={{ x: 3, y: 3 }} flat={false} spacing={1.02} origin={{ x: 0, y: 0 }}>
